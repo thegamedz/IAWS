@@ -1,15 +1,10 @@
 package com.iaws.project;
 
 import java.io.IOException;
-
-import javax.swing.JOptionPane;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import com.iaws.project.parametres.ParramsVeloArret;
 
 
 public class JSONHandler {
@@ -32,7 +27,6 @@ public class JSONHandler {
 			restOutput = rest.httpGet(url);
 			JSONParser parser = new JSONParser();
 			Object obj = parser.parse(restOutput);
-			//result = (JSONObject) parser.parse(restOutput);
 			if(obj.getClass().equals(result.getClass())){
 				result = (JSONObject)obj;
 				return result;
@@ -53,6 +47,28 @@ public class JSONHandler {
 	
 	}
 	
+	public Object getJObjectFromString(String str)
+	{
+		JSONObject result = new JSONObject();
+		JSONArray result1=null;
+		try {
+			JSONParser parser = new JSONParser();
+			Object obj = parser.parse(str);
+			if(obj.getClass().equals(result.getClass())){
+				result = (JSONObject)obj;
+				return result;
+			}
+			else{
+				result1 = (JSONArray)obj;
+				return result1;
+			}
+		} catch (ParseException e)
+		{
+			return(		"ParseException, error in JSon Stream: "+str
+					+	"\nprintstack:"+e.toString());
+		}
+	
+	}
 	/**
 	 * Get the class of an object
 	 * @param o The object to test

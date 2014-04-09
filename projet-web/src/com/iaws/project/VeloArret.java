@@ -2,9 +2,6 @@ package com.iaws.project;
 
 public class VeloArret {
 
-	
-
-
 	private String name;
 	private String available_bikes;
 	private String adress;
@@ -12,7 +9,6 @@ public class VeloArret {
 	public VeloArret(){
 		
 	}
-	
 	
 	public VeloArret(String number,String name, String available_bikes,String adress) {
 		super();
@@ -24,7 +20,6 @@ public class VeloArret {
 	public String toString() {
 		return name+" "+adress+" "+available_bikes;
 	}
-	
 	
 	public String getName() {
 		return name;
@@ -38,14 +33,10 @@ public class VeloArret {
 	public void setAvailable_bikes(String available_bikes) {
 		this.available_bikes = available_bikes;
 	}
-
-
-
+	
 	public String getAdress() {
 		return adress;
 	}
-
-
 
 	public void setAdress(String adress) {
 		this.adress = adress;
@@ -55,7 +46,6 @@ public class VeloArret {
 	public String getNumber() {
 		return number;
 	}
-
 
 	public void setNumber(String number) {
 		this.number = number;

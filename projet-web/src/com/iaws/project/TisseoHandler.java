@@ -30,7 +30,12 @@ public class TisseoHandler implements TisseoHandlerInterface{
 	}
 	public TisseoHandler()
 	{
-		process();
+		try {
+			process();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	@Override
 	public HashMap<String, Ligne> getLignes() {
@@ -38,9 +43,11 @@ public class TisseoHandler implements TisseoHandlerInterface{
 		return(listeLignes);
 	}
 	
-	public void process()
+	public void process() throws Exception
 	{
 		log("Starting process");
+		log("Creating/Loading DB");
+		DatabaseHandler.createDB();
 		if (!listeLignes.isEmpty())
 		{	
 			log("Ending process, nothig to download, everything up to date");
@@ -108,6 +115,12 @@ public class TisseoHandler implements TisseoHandlerInterface{
 						getIdByShortName.put(courtNomDeLaLignePassantParLarret, idDeLaLignePassantParLarret);
 						lignePassantParLarret.addArret(nouvelArret);
 						listeLignes.put(idDeLaLignePassantParLarret, lignePassantParLarret);
+						/* Gerer exception */
+						try {
+						DatabaseHandler.insertLine(idDeLaLignePassantParLarret, courtNomDeLaLignePassantParLarret, nomDeLaLignePassantParLarret);
+						} catch (Exception e){
+							/* Ignorer */
+						}
 						
 					}
 					else {
