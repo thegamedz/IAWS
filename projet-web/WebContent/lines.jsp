@@ -88,8 +88,8 @@
 		out.println("<tr>");
 		
 		/* Note */
-		out.println("<td><font color='red'>"+unlikes+"</font color='yellow'>/</font>"
-				+ " <font color='green'>"+likes+"</font></td>");
+		out.println("<td><font color='green'>"+likes+"</font color='yellow'> / </font>"
+				+ " <font color='red'>"+unlikes+"</font></td>");
 		
 		/* Nom */
 		out.println("<td>");
@@ -108,10 +108,11 @@
 		
 		/* Like Unlike */
 		out.println("<td>");
-				out.println("<span><input type='button' value=\"-\" onclick=\"post_to_url('lines.jsp', { idLigne:'" 
-						+ pairs.getValue().getId()+"', type:'dislike'} , { submit: 'post' } );\"/>");
-				out.println("<span><input type='button' value=\"+\" onclick=\"post_to_url('lines.jsp', { idLigne:'" 
+
+				out.println("<span><input type='button' value=\"Like\" onclick=\"post_to_url('lines.jsp', { idLigne:'" 
 						+ pairs.getValue().getId()+"', type:'like'} , { submit: 'post' } );\"/>");
+				out.println("<span><input type='button' value=\"Unlike\" onclick=\"post_to_url('lines.jsp', { idLigne:'" 
+						+ pairs.getValue().getId()+"', type:'dislike'} , { submit: 'post' } );\"/>");
 		out.println("</td>");
 		out.println("</tr>");
 	}

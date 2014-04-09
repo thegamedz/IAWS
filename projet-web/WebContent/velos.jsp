@@ -4,7 +4,7 @@
 <%@page import="com.iaws.project.parametres.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="ISO-8859-1"%>
-<%! RestWSConsumer rest = new RestWSConsumer(); 
+<%!
 	JcdecoHandler jc = new JcdecoHandler();
 	VeloArret v_arret = new VeloArret();
 %>
@@ -52,7 +52,8 @@
 						  <tbody>
 							
 	<%
-	for(int i=0;i<jc.getVelosArret().size();i++){
+	int size = jc.getVelosArret().size();
+	for(int i=0;i<size;i++){
 		v_arret=jc.getVelosArret().get(i);
 		out.println("<tr>");
 		out.println("<td>"+v_arret.getName()+"</td>");

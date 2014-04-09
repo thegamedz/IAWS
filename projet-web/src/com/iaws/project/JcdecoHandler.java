@@ -11,7 +11,7 @@ public class JcdecoHandler implements JcdecoHandlerInterface{
 	//private static HashMap<String, VeloArret> listeVelosArret = new HashMap<String, VeloArret>();
 	private static ArrayList<VeloArret> List_velo = new ArrayList<>();
 	public JcdecoHandler()
-	{
+	{	List_velo = new ArrayList<>();
 		process();
 	}
 	public void process(){
@@ -38,6 +38,8 @@ public class JcdecoHandler implements JcdecoHandlerInterface{
 	
 	@Override
 	public ArrayList<VeloArret> getVelosArret() {
+		//List_velo.clear();
+		//process();
 		return List_velo;
 	}
 
