@@ -125,7 +125,7 @@ public class DatabaseHandler {
 			return(-1);
 		}
 		JSONObject json = (JSONObject) obj;
-		nbDislikes = (Long) json.get("likes");
+		nbDislikes = (Long) json.get("unlikes");
 		return(nbDislikes);
 	}
 	

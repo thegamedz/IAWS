@@ -1,3 +1,4 @@
+<%@page import="com.iaws.project.DatabaseHandler"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.iaws.project.TisseoHandler"%>
@@ -16,6 +17,21 @@
 <div class="top" >
 	<h1 align="center"> Veuillez choisir une ligne</h1>
 </div>
+<%
+String lineId = request.getParameter("idLigne");
+String type = request.getParameter("type");
+if (((lineId != null) && (!lineId.isEmpty())) && ((type != null) && (!type.isEmpty())))
+{
+if (type.equals("like")) 
+{
+DatabaseHandler.likeunlike(lineId, true);
+} 
+else if (type.equals("dislike"))
+{
+DatabaseHandler.likeunlike(lineId, false);
+}
+}
+%>
 <%=  tisseo.getLinesToString()%>
 </body>
 </html>

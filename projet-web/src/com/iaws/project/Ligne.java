@@ -41,7 +41,17 @@ public class Ligne {
 	 * Valeurs possibles: [metro , bus]
 	 */
 	private String modeDeTransport;
-
+	
+	/**
+	 * Nombre de likes
+	 */
+	private Long likes;
+	
+	/**
+	 * nombre de unlikes
+	 */
+	private Long unlikes;
+	
 	public Ligne(String id, String nomDeLaLigne, String nomCourtDeLaLigne,
 			String modeDeTransport) {
 		super();
@@ -80,6 +90,24 @@ public class Ligne {
 		return id;
 	}
 	
+	
+	
+	public Long getLikes() {
+		return likes;
+	}
+
+	public void setLikes(Long likes) {
+		this.likes = likes;
+	}
+
+	public Long getUnlikes() {
+		return unlikes;
+	}
+
+	public void setUnlikes(Long unlikes) {
+		this.unlikes = unlikes;
+	}
+
 	public void addArret(Arret _arret)
 	{
 		listeArrets.add(new Arret(_arret));

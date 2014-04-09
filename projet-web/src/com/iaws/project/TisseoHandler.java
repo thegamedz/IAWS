@@ -46,13 +46,13 @@ public class TisseoHandler implements TisseoHandlerInterface{
 	public void process() throws Exception
 	{
 		log("Starting process");
-		log("Creating/Loading DB");
-		DatabaseHandler.createDB();
 		if (!listeLignes.isEmpty())
 		{	
 			log("Ending process, nothig to download, everything up to date");
 			return;
 		}
+		log("Creating/Loading DB");
+		DatabaseHandler.createDB();
 		JSONHandler parser = new JSONHandler();
 		//bbox=1.4432,43.5435,1.4847,43.5769
 		JSONObject obj = (JSONObject) parser.getJObject(ParamsPointsArrets.getUrl("", "json", "1.4432,43.5435,1.4847,43.5769", "", "", "1", "1", "", "", 
@@ -114,12 +114,18 @@ public class TisseoHandler implements TisseoHandlerInterface{
 						reseauDeLaLignePassantParLarret);
 						getIdByShortName.put(courtNomDeLaLignePassantParLarret, idDeLaLignePassantParLarret);
 						lignePassantParLarret.addArret(nouvelArret);
-						listeLignes.put(idDeLaLignePassantParLarret, lignePassantParLarret);
 						/* Gerer exception */
 						try {
 						DatabaseHandler.insertLine(idDeLaLignePassantParLarret, courtNomDeLaLignePassantParLarret, nomDeLaLignePassantParLarret);
+						long likesDeLaLigne = DatabaseHandler.getNbLikes(idDeLaLignePassantParLarret);
+						long unlikesDeLaLigne = DatabaseHandler.getNbDislikes(idDeLaLignePassantParLarret);
+						lignePassantParLarret.setLikes(likesDeLaLigne);
+						lignePassantParLarret.setUnlikes(unlikesDeLaLigne);
+						listeLignes.put(idDeLaLignePassantParLarret, lignePassantParLarret);
+						log("Ligne: "+lignePassantParLarret.getNomCourtDeLaLigne()+", Likes: "+lignePassantParLarret.getLikes());
 						} catch (Exception e){
 							/* Ignorer */
+							log("ERREUR");
 						}
 						
 					}
@@ -197,35 +203,7 @@ public class TisseoHandler implements TisseoHandlerInterface{
 		chaineResultat.append("</div>");
 		return chaineResultat.toString();
 	}
-	/*
-	 <div>
-  <ul>
-    <li>
-      <img src="http://lorempixum.com/100/100/nature/1">
-      <h3>Headline</h3>
-      <p>Lorem ipsum dolor sit amet...</p>
-    </li>
-       
-    <li>
-      <img src="http://lorempixum.com/100/100/nature/2">
-      <h3>Headline</h3>
-      <p>Lorem ipsum dolor sit amet...</p>
-    </li>
- 
-    <li>
-      <img src="http://lorempixum.com/100/100/nature/3">
-      <h3>Headline</h3>
-      <p>Lorem ipsum dolor sit amet...</p>
-    </li>
- 
-    <li>
-      <img src="http://lorempixum.com/100/100/nature/4">
-      <h3>Headline</h3>
-      <p>Lorem ipsum dolor sit amet...</p>
-    </li>
-  </ul>
-</div>
-	 */
+	
 	@Override
 	public String getLinesToString() {
 		StringBuffer chaineResultat = new StringBuffer();
@@ -239,7 +217,11 @@ public class TisseoHandler implements TisseoHandlerInterface{
 		while(it.hasNext())
 		{	
 			Map.Entry<String, Ligne> pairs = (Map.Entry<String, Ligne>) it.next();
+			// Récupérer les likes et unlikes d'une ligne et dresser une note
+			long likes = DatabaseHandler.getNbLikes(pairs.getKey());
+			long unlikes = DatabaseHandler.getNbDislikes(pairs.getKey());
 			chaineResultat.append("<div>");
+			chaineResultat.append("<span>Note: "+(likes-unlikes)+"</span>");
 			chaineResultat.append("<span><li onclick=\"post_to_url('arrets.jsp', { idLigne:'" 
 									+ pairs.getValue().getId()+"'} , { submit: 'post' } );\">");
 			chaineResultat.append("<h3>");
@@ -247,23 +229,14 @@ public class TisseoHandler implements TisseoHandlerInterface{
 			chaineResultat.append("</h3>");
 			chaineResultat.append("<p> Ligne: "+pairs.getValue().getNomDeLaLigne()+"</p>");
 			chaineResultat.append("</li></span>");
-			chaineResultat.append("<span style=\"float: right\"><input type='button' id='"+pairs.getValue().getId()+"l' value=\"Like!\"/>");
-			chaineResultat.append("<input type='button' id='"+pairs.getValue().getId()+"u' value=\"Unlike!\"/></span>");
+			chaineResultat.append("<span style=\"float: right\"><input type='button' value=\"Like!\" onclick=\"post_to_url('lines.jsp', { idLigne:'" 
+									+ pairs.getValue().getId()+"', type:'like'} , { submit: 'post' } );\"/>");
+			chaineResultat.append("<span style=\"float: right\"><input type='button' value=\"Dislike!\" onclick=\"post_to_url('lines.jsp', { idLigne:'" 
+					+ pairs.getValue().getId()+"', type:'dislike'} , { submit: 'post' } );\"/>");
 			chaineResultat.append("</div>");
 		}
 		chaineResultat.append("</div>");
 		log(chaineResultat.toString());
-		/*
-		while(it.hasNext())
-		{	
-			Map.Entry<String, Ligne> pairs = (Map.Entry<String, Ligne>) it.next();
-			chaineResultat.append("<form method=\"post\" action=\"arrets.jsp\">");
-			chaineResultat.append("Ligne: "+pairs.getValue().getNomCourtDeLaLigne()+" "+pairs.getValue().getNomDeLaLigne());
-			chaineResultat.append("<input type=\"hidden\" name=\"id\" value=\""+pairs.getValue().getId()+"\"/>");
-log(pairs.getValue().getId()+" "+pairs.getValue().getNomCourtDeLaLigne()+" "+pairs.getValue().getNomDeLaLigne());
-			chaineResultat.append("<input type=\"submit\" value=\"Arrets\"/>");
-			chaineResultat.append("</form><br>");
-		}*/
 		log("Starting web page!");
 		return chaineResultat.toString();
 	}
