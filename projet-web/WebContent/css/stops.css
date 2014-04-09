@@ -19,13 +19,14 @@ li p {
 li {
   padding: 10px;
   overflow: auto;
+  color: yellow;
+  border: 1px solid;
 }
  
 li:hover {
  	background: #3f460f;
 	background: -webkit-gradient(linear, left top, left 30%, from(#314660), to(#364B66));
 	color: yellow;
-	border-radius:25px;
 	border:1px solid;
 }
 

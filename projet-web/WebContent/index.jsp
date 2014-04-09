@@ -7,7 +7,7 @@
     <title>IAWS Web Services</title>
     <style type="text/css"><%@include file="/css/main.css" %></style>
 </head>
-<body>
+<body id="bodyindex">
 
 <div id="header">
     <div id="logo">
@@ -19,19 +19,10 @@
     <div id="main" align="center">
     		<span class="image1">
     			<a  href="lines.jsp" >
-                    <img class="timer" width="100" height="100" title="" alt="heure d'arrivÃ©e" src="/projet-web/images/Maps.png"></img>
+                    <img class="timer" width="100" height="100" title="" alt="heure d'arrivÃ©e" src="/projet-web/images/metro.png"></img>
                 </a>
     		</span>
-    		<span class="image2">
-    			<a  href="#">
-                    <img class="metro" width="100" height="100" title="" alt="" src="/projet-web/images/metro.png"></img>
-                </a>
-    	    </span>
-    		<span class="image3">
-    			<a  href="#">
-                    <img class="timer" width="100" height="100" title="" alt="" src="/projet-web/images//timer.png"></img>
-                </a>
-    		</span>
+    		
     		<span class="image4">
     			<a  href="velos.jsp">
                     <img class="Velo" width="100" height="100" title="" alt="" src="/projet-web/images/velo.png"></img>

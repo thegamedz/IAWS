@@ -1,5 +1,9 @@
 * {margin: 0; padding: 0;}
  
+body {
+	text-align: center;
+}
+
 ul {
   list-style-type: none;
   width: 500px;
@@ -12,21 +16,25 @@ h3 {
  
 li p {
   font: 250 15px/1.5 Georgia, Times New Roman, serif;
-  margin-left: 100px
+  margin-left: 100px;
   
 }
  
-li {
+div li {
+  float: left;
   padding: 10px;
   overflow: auto;
+  display:block;
+  width: 700px;
+  height: 130px;
 }
  
 li:hover {
  	background: #3f460f;
 	background: -webkit-gradient(linear, left top, left 30%, from(#314660), to(#364B66));
 	color: yellow;
-	border-radius:25px;
-	border:1px solid;
+	border-left:1px solid;
+	border-right:1px solid;
 }
 
 span {
@@ -34,8 +42,9 @@ span {
 }
 
 div {
+	color: yellow;
+	width: 1000px;
 	border:2px solid;
-	border-radius:25px;
 }
 .top {
 	padding: 50px;
@@ -58,4 +67,17 @@ div {
 .buttons {
 	float: right;
 	margin-right: 10px;
+}
+
+.notes {
+	text-align:center;
+	vertical-align: middle;
+	padding: 10px;
+	font: bold 20px/1.5 Helvetica, Verdana, sans-serif;
+	background: black;
+	height: 100%;
+	width: 80px;
+	border-right:1px solid;
+	border-bottom: 1px solid;
+	float: left;
 }

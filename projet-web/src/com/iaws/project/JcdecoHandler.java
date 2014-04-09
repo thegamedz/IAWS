@@ -15,14 +15,13 @@ public class JcdecoHandler implements JcdecoHandlerInterface{
 		process();
 	}
 	public void process(){
-		
+		if (List_velo.isEmpty()) {
 		JSONHandler parser = new JSONHandler();
 		
 		Object obj = parser.getJObject(ParramsVeloArret.getUrl());
-	JSONArray jsonarr = (JSONArray)obj;
+		JSONArray jsonarr = (JSONArray)obj;
 		System.out.println(obj.toString());
-	for(int i=0;i<jsonarr.size();i++)
-		{
+		for(int i=0;i<jsonarr.size();i++) {
 		JSONObject jsobj = new JSONObject();
 		jsobj = (JSONObject)jsonarr.get(i);
 		
@@ -33,6 +32,7 @@ public class JcdecoHandler implements JcdecoHandlerInterface{
 		VeloArret va = new VeloArret(number,name,nbvelodispo,address);
 		List_velo.add(va);
 		}
+	}
 	
 	}
 	

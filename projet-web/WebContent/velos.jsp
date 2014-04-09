@@ -20,8 +20,8 @@
 	<%@include file="/css/charisma-app.css"%>
 	<%@include file="/css/jquery-ui-1.8.21.custom.css"%>
 	<%@include file='/css/fullcalendar.css'%>
-	
     </style>
+ 	<script type="text/javascript" src="js/searchTable.js"></script>
 </head>
 <body>
 
@@ -38,8 +38,11 @@
 						<h2><i class="icon-user"></i> Velo Arrêt</h2>
 					</div>
 					<div class="box-content">
-						<table class="table table-striped table-bordered bootstrap-datatable datatable">
+						<table class="table table-striped table-bordered bootstrap-datatable datatable" id="existing">
 						  <thead>
+						   <tr><td>
+                   				 <input type="text" id="search" placeholder="Type to search" onkeyup="doSearch()"/>
+           					 </td></tr>
 							  <tr>
 								  <th>Nom</th>
 								  <th>Adresse</th>
@@ -58,7 +61,7 @@
 		out.println("<span class=\"label label-success\">"+v_arret.getAvailable_bikes()+"</span>");
 		out.println("</td>");
 		out.println("</tr>");
-												}
+	}
     %>
 
 						</tbody>
@@ -69,6 +72,6 @@
  <div id="footer">
         Iaws Project
     </div>
-
+       
 </body>
 </html>

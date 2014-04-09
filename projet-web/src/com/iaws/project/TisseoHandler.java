@@ -22,7 +22,7 @@ import com.iaws.project.parametres.ParamsProchainPassage;
  */
 public class TisseoHandler implements TisseoHandlerInterface{
 	private static HashMap<String, String> getIdByShortName = new HashMap<String, String>();
-	private static HashMap<String, Ligne> listeLignes = new HashMap<String, Ligne>();
+	public static HashMap<String, Ligne> listeLignes = new HashMap<String, Ligne>();
 	/* A inclure dans un champ des arrets de paul sabatier comme étant une destination */
 	private void log(String str)
 	{
@@ -221,8 +221,11 @@ public class TisseoHandler implements TisseoHandlerInterface{
 			long likes = DatabaseHandler.getNbLikes(pairs.getKey());
 			long unlikes = DatabaseHandler.getNbDislikes(pairs.getKey());
 			chaineResultat.append("<div>");
-			chaineResultat.append("<span>Note: "+(likes-unlikes)+"</span>");
-			chaineResultat.append("<span><li onclick=\"post_to_url('arrets.jsp', { idLigne:'" 
+			/* Dislikes / Likes */
+			chaineResultat.append("<span class='notes'><font color='red'>"+unlikes+"</font color='yellow'>/</font>"
+					+ " <font color='green'>"+likes+"</font></span>");
+			
+			chaineResultat.append("<span style=\"float : center\"><li onclick=\"post_to_url('arrets.jsp', { idLigne:'" 
 									+ pairs.getValue().getId()+"'} , { submit: 'post' } );\">");
 			chaineResultat.append("<h3>");
 			chaineResultat.append(pairs.getValue().getNomCourtDeLaLigne());
@@ -238,6 +241,7 @@ public class TisseoHandler implements TisseoHandlerInterface{
 		chaineResultat.append("</div>");
 		log(chaineResultat.toString());
 		log("Starting web page!");
+		
 		return chaineResultat.toString();
 	}
 	
